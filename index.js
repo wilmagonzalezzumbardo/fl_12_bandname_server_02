@@ -36,6 +36,14 @@ io.on('connection', client =>
         console.log(payload);
         io.emit('mensaje', {mensaje: 'he recibido el payload', payload});
     });
+
+
+    client.on('nuevo-mensaje', (payload)=> 
+    {
+        console.log ('si recibi el NUEVO MENSAJE, YEEEE!!! 333333');
+        console.log(payload);
+        io.emit('mensaje', {mensaje: 'he recibido el NUEVO MENSAJE YEEEE payload 3333333', payload});
+    });
 }
 );
     

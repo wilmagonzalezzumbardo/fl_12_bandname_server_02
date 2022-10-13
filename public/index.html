@@ -27,6 +27,7 @@
             }
         );
 
+
         socket.emit('mensaje', {nombre:'fernando', id: 10, votos: 10});
 
         socket.on ('mensaje', function(payload)
@@ -34,6 +35,33 @@
             console.log (payload);
             console.log(today);
         });
+
+
+        socket.on ('emitir-nuevo-mensaje', function(payload)
+        {
+            console.log("dentro del index.html");
+            console.log (payload);
+            console.log(today);
+            console.log("dentro del index.html");
+        });
+
+        socket.on ('vote-band', function(payload)
+        {
+            console.log("dentro del index.html vote-band");
+            console.log (payload);
+            console.log("dentro del index.html vote band");
+        });
+
+        socket.on ('active-bands', function(bands)
+        {
+            console.clear();
+            console.log("dentro del index.html ACTIVE-BANDS");
+            console.log (bands);
+            console.table(bands);
+            console.log(today);
+            console.log("dentro del index.html ACTIVE BANDS");
+        });
+
     </script>
 </body>
 </html>
