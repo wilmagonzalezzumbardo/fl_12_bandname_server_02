@@ -1,6 +1,20 @@
+//PARA EJECUTAR EL PROYECTO
+// DESDE LA TERMINAL DE VISUAL STUDIO CODE REGISTRAR
+//npm run start:dev
+
+
+//db config
+const {dbConnection} = require ('./database/config');
+dbConnection();
+// o  require ('./database/config').dbConnection();
+
+//app express
 const express = require('express');
 const app = express();
 // permite escuchar peticiones, es la app de express
+
+//lectura y parseo del body
+app.use(express.json());
 
 
 const path = require('path');
@@ -49,10 +63,16 @@ io.on('connection', client =>
     
    */
 
+//path publico
 const publicPath = path.resolve(__dirname, 'public');
 //__dirname, indica en donde apunta nuestro servidor
-console.log (publicPath);
 app.use(express.static(publicPath));
+console.log (publicPath);
+
+//mis rutas
+//se definen middewares, son simples funciones que se ejecutan cuando pasan por aca
+app.use('/api/login', require('./routes/auth'));
+
 server.listen(process.env.PORT, (err) => {
     if (err) throw new Error(err);
     console.log ("Wilma, revisa, el Servidor corriendo en el puerto");
