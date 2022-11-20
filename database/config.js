@@ -6,6 +6,7 @@ const dbConnection = async() =>
 {
     console.log('dentro del async');
     console.log(process.env.DB_CNN);
+    console.log('prueba');
     try
     {
         /*
