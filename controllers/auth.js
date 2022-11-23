@@ -37,20 +37,12 @@ const buscaLogin = async (req, res = response) =>
     }
     catch(error)
     {
-        if (existeEmail== false)
-        {
-            return res.status(400).json({
-                ok: false,
-                msg: "El correo registrado no existe"
-            });
-        }
-        else
-        {
+        console.log(existeEmail);
         res.status(500).json({
             ok: false,
-            msg: 'Hable con el administrador, hubo un error al momento de validar el login del usuario | ' + error 
-        }}
-        );
+            msg: 'wilma Hable con el administrador, hubo un error al momento de validar el login del usuario | ' + error 
+        });
+        
     }
 }
  
