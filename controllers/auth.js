@@ -9,8 +9,12 @@ const buscaLogin = async (req, res = response) =>
     const {email, password, token} = req.body;
     try
     {
+        console.log(email);
+        console.log(password);
+        //console.log(token);
         const existeEmail = await Usuario.findOne({email});
-        if (existeEmail== false)
+        console.log(existeEmail);
+        if (existeEmail== false || existeEmail == null)
         {
             return res.status(400).json({
                 ok: false,
@@ -37,11 +41,11 @@ const buscaLogin = async (req, res = response) =>
     }
     catch(error)
     {
-        console.log(existeEmail);
         res.status(500).json({
             ok: false,
             msg: 'wilma Hable con el administrador, hubo un error al momento de validar el login del usuario | ' + error 
-        });
+        }
+        );
         
     }
 }
