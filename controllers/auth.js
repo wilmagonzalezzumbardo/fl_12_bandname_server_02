@@ -60,6 +60,7 @@ const controllerRenuevaToken = async (req, res = response ) =>
     console.log(token);
     res.json({
         ok: true,
+        msg: "ok",
         usuario: usuarioDB,
         token
 
