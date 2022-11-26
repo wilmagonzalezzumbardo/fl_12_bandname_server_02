@@ -16,7 +16,7 @@ io.on('connection', client =>
     console.log("Mensaje1, cliente conectado");
     console.log(today);
     
-    console.log(client.handshake.headers):
+    console.log(client.handshake.headers);
 
     console.log ("on connection INI");
     var sLista = bands.getBands();
