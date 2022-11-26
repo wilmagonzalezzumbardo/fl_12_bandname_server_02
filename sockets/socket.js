@@ -1,6 +1,7 @@
 const { io } = require('../index');
 const Bands = require('../models/bands');
 const Band = require('../models/band');
+const { comprobarJWT } = require('../helpers/jwt');
 const bands = new Bands();
 
 bands.addBand(new Band ('Mateos'));
@@ -16,7 +17,10 @@ io.on('connection', client =>
     console.log("Mensaje1, cliente conectado");
     console.log(today);
     
-    console.log(client.handshake.headers);
+    console.log(client.handshake.headers['x-token']);
+    const [valido, uid ] = comprobarJWT (client.handshake.headers['x-token']);
+    console.log (valido);
+    console.log (uid);
 
     console.log ("on connection INI");
     var sLista = bands.getBands();
