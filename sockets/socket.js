@@ -21,6 +21,11 @@ io.on('connection', client =>
     const [valido, uid ] = comprobarJWT (client.handshake.headers['x-token']);
     console.log (valido);
     console.log (uid);
+    if (!valido)
+    {
+        return client.disconnect();
+    }
+    console.log ("cliente conectado " . uid);
 
     console.log ("on connection INI");
     var sLista = bands.getBands();
