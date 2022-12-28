@@ -2,6 +2,8 @@ const { io } = require('../index');
 const Bands = require('../models/bands');
 const Band = require('../models/band');
 const { comprobarJWT } = require('../helpers/jwt');
+const { usuarioConectado, usuarioDesconectado, grabarMensaje} = require('../controllers/socket');
+
 const bands = new Bands();
 
 bands.addBand(new Band ('Mateos'));
@@ -21,10 +23,33 @@ io.on('connection', client =>
     const [valido, uid ] = comprobarJWT (client.handshake.headers['x-token']);
     console.log (valido);
     console.log (uid);
+    // verifica autenticacion
     if (!valido)
     {
         return client.disconnect();
     }
+
+
+    // Cliente autenticado
+    usuarioConectado(uid);
+
+
+    //Ingresar al usuario a una sala en particular
+    //SALA GLOBAL
+
+    //SALA PRIVADA, 
+    client.join(uid);
+
+    //escuchar del cliente el mensaje personal
+    client.on('mensaje-personal', async (payload) => {
+        //grabar mensaje
+        await grabarMensaje(payload);
+
+
+        console.log(payload);
+        io.to(payload.para).emit('mensaje-personal', payload);
+    });
+
     console.log ("cliente conectado " . uid);
 
     console.log ("on connection INI");
@@ -44,6 +69,7 @@ io.on('connection', client =>
     { 
         console.log("Mensaje2, cliente desconectado");
         console.log(today);
+        usuarioDesconectado(uid);
     });
 
     //escuchar un mensaje

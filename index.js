@@ -71,7 +71,9 @@ console.log (publicPath);
 
 //mis rutas
 //se definen middewares, son simples funciones que se ejecutan cuando pasan por aca
-app.use('/api/login', require('./routes/auth'));
+app.use('/api/login',    require('./routes/auth'));
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/mensajes', require('./routes/mensajesGI'));
 
 server.listen(process.env.PORT, (err) => {
     if (err) throw new Error(err);
